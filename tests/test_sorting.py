@@ -1,5 +1,6 @@
 from insertion_sort import insertion_sort
 from merge_sort import merge_sort
+import random
 import pytest
 
 pytestmark = pytest.mark.parametrize("sort_function", [insertion_sort, merge_sort])
@@ -24,3 +25,8 @@ def test_sort_duplicate_elements(sort_function):
 
 def test_sort_negative_numbers(sort_function):
     assert sort_function([-3, -1, -4, -1, -5]) == [-5, -4, -3, -1, -1]
+
+def test_sort_large_array(sort_function):
+    arr = [i for i in range(1, 102)]
+    random.shuffle(arr)
+    assert sort_function(arr) == [i for i in range(1, 102)]
