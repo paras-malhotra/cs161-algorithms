@@ -23,7 +23,7 @@ def test_sort_single_element(sort_function):
 def test_sort_duplicate_elements(sort_function):
     assert sort_function([3, 2, 1, 2, 3]) == [1, 2, 2, 3, 3]
     assert sort_function([5, 5, 4, 3, 3, 4], lambda x, y: x > y) == [5, 5, 4, 4, 3, 3]
-    assert sort_function([2, 3, 4, 3] + [1 for i in range(100)]) == ([1 for i in range(100)] + [2, 3, 3, 4])
+    assert sort_function([2 for i in range(100)] + [1 for i in range(100)] + [3 for i in range(100)]) == ([1 for i in range(100)] + [2 for i in range(100)] + [3 for i in range(100)])
 
 def test_sort_negative_numbers(sort_function):
     assert sort_function([-3, -1, -4, -1, -5]) == [-5, -4, -3, -1, -1]

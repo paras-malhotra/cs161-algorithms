@@ -22,4 +22,4 @@ def test_select_k_large_array(selectk_function):
     assert selectk_function(arr, 45) == 45
 
 def test_select_k_duplicate_elements(selectk_function):
-    assert selectk_function([2, 3] + [1 for i in range(100)], 101) == 2
+    assert selectk_function([2 for i in range(100)] + [1 for i in range(100)] + [3 for i in range(100)], 105) == 2
