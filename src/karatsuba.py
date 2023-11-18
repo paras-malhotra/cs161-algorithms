@@ -1,4 +1,25 @@
-def karatsuba(x, y):
+def karatsuba(x: int, y: int) -> int:
+    """
+    Perform multiplication using the Karatsuba algorithm.
+
+    The Karatsuba algorithm is a divide-and-conquer algorithm that
+    multiplies two numbers more efficiently than the traditional 
+    approach. It's particularly useful for large numbers.
+
+    Parameters:
+    x (int): The first integer to multiply.
+    y (int): The second integer to multiply.
+
+    Returns:
+    int: The product of x and y.
+
+    Time Complexity:
+    O(n^log2(3)) ≈ O(n^1.585), where n is the number of digits in the larger number.
+
+    Example:
+    >>> karatsuba(1234, 5678)
+    7006652
+    """
     # Base case
     if x < 10 and y < 10:
         return x * y

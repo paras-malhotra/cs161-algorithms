@@ -6,3 +6,4 @@ dependencies:
   - pip
   - pip:
     - pytest>=6.0
+    - typing
