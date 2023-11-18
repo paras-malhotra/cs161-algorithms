@@ -4,7 +4,7 @@
 This repository contains implementations of algorithms covered in Stanford's CS161 course.
 
 ## Features
-- 🌐 Python implementations of the algorithms covered in CS161.
+- 🐍 Python implementations of the algorithms covered in CS161.
 - ✔ Comprehensive unit tests using pytest.
 
 ## Getting Started
