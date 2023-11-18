@@ -1,7 +1,8 @@
 from insertion_sort import insertion_sort
+from merge_sort import merge_sort
 import pytest
 
-pytestmark = pytest.mark.parametrize("sort_function", [insertion_sort])
+pytestmark = pytest.mark.parametrize("sort_function", [insertion_sort, merge_sort])
 
 def test_sort_ascending(sort_function):
     assert sort_function([3, 2, 1]) == [1, 2, 3]

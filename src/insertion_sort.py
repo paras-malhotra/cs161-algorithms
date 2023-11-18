@@ -7,17 +7,19 @@ def insertion_sort(arr: List[T], comparator: Callable[[T, T], bool] = lambda x, 
     Perform an in-place insertion sort on a list with an optional custom comparator.
 
     Parameters:
-    arr (List): A list of elements to be sorted.
-    comparator (Callable[[int, int], bool], optional): A comparison function that returns True if the first argument is considered smaller than the second. Defaults to ascending order.
+    arr (List[T]): A list of elements to be sorted.
+    comparator (Callable[[T, T], bool], optional): A comparison function that returns True if the first argument is considered smaller than the second. Defaults to ascending order.
 
     Returns:
     List: The sorted list.
 
     Time Complexity:
-    Average and Worst Case: O(n^2), where n is the number of items in the list.
+    Worst Case: O(n^2), where n is the number of items in the list.
 
     Example:
     >>> insertion_sort([3, 1, 4, 1, 5])
+    [1, 1, 3, 4, 5]
+    >>> insertion_sort([3, 1, 4, 1, 5], lambda x, y: x > y)
     [5, 4, 3, 1, 1]
     """
     for i in range(1, len(arr)):
