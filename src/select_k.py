@@ -84,7 +84,7 @@ def quick_select_k(arr: List[T], k: int, comparator: Callable[[T, T], bool] = la
 
 def choose_pivot(arr: List[T], comparator: Callable[[T, T], bool] = lambda x, y: x < y) -> T:
     """
-    Choose a pivot element from a list by splitting the list into groups of 5 and selecting the median of each group.
+    Choose a pivot element from a list by splitting the list into groups of 5 and selecting the median of each group. Then, select the median of the medians as the pivot element.
 
     Parameters:
     arr (List[T]): A list of elements to be sorted.
