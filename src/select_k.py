@@ -28,20 +28,19 @@ def select_k(arr: List[T], k: int, comparator: Callable[[T, T], bool] = lambda x
     if len(arr) <= 1:
         return arr[0]
 
-    if len(arr) <= 30:
-        # Avoids maximum recursion depth error
-        return merge_sort(arr, comparator)[k - 1]
-
     pivot = choose_pivot(arr)
-    left = [x for x in arr if comparator(x, pivot)]
-    right = [x for x in arr if not comparator(x, pivot)]
 
-    if len(left) == k - 1:
+    # < and > arrays are chosen instead of < and >= arrays to avoid infinite recursion or maximum recursion depth error
+    left = [x for x in arr if comparator(x, pivot)]
+    right = [x for x in arr if not comparator(x, pivot) and x != pivot]
+    num_equal = len(arr) - len(left) - len(right)
+
+    if len(left) < k and len(left) + num_equal >= k:
         return pivot
-    elif len(left) > k - 1:
+    elif len(left) >= k:
         return select_k(left, k, comparator)
     else:
-        return select_k(right, k - len(left), comparator)
+        return select_k(right, k - len(left) - num_equal, comparator)
 
 def quick_select_k(arr: List[T], k: int, comparator: Callable[[T, T], bool] = lambda x, y: x < y) -> T:
     """
@@ -67,20 +66,19 @@ def quick_select_k(arr: List[T], k: int, comparator: Callable[[T, T], bool] = la
     if len(arr) <= 1:
         return arr[0]
 
-    if len(arr) <= 30:
-        # Avoids maximum recursion depth error
-        return merge_sort(arr, comparator)[k - 1]
-
     pivot = random.choice(arr)
-    left = [x for x in arr if comparator(x, pivot)]
-    right = [x for x in arr if not comparator(x, pivot)]
 
-    if len(left) == k - 1:
+    # < and > arrays are chosen instead of < and >= arrays to avoid infinite recursion or maximum recursion depth error
+    left = [x for x in arr if comparator(x, pivot)]
+    right = [x for x in arr if not comparator(x, pivot) and x != pivot]
+    num_equal = len(arr) - len(left) - len(right)
+
+    if len(left) < k and len(left) + num_equal >= k:
         return pivot
-    elif len(left) > k - 1:
+    elif len(left) >= k:
         return quick_select_k(left, k, comparator)
     else:
-        return quick_select_k(right, k - len(left), comparator)
+        return quick_select_k(right, k - len(left) - num_equal, comparator)
 
 def choose_pivot(arr: List[T], comparator: Callable[[T, T], bool] = lambda x, y: x < y) -> T:
     """
