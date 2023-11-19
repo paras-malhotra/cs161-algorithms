@@ -1,10 +1,11 @@
 from insertion_sort import insertion_sort
 from merge_sort import merge_sort
 from quick_sort import quick_sort
+from heap_sort import heap_sort
 import random
 import pytest
 
-pytestmark = pytest.mark.parametrize("sort_function", [insertion_sort, merge_sort, quick_sort])
+pytestmark = pytest.mark.parametrize("sort_function", [insertion_sort, merge_sort, quick_sort, heap_sort])
 
 def test_sort_ascending(sort_function):
     assert sort_function([3, 2, 1]) == [1, 2, 3]
