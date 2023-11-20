@@ -11,17 +11,17 @@ This repository contains implementations of algorithms covered in Stanford's CS1
 
 ### Using pip
 ```bash
-git clone [repository-url]
+git clone git@github.com:paras-malhotra/cs161-algorithms.git
 cd cs161-algorithms
 pip install -r requirements.txt
 ```
 
 ### Using Conda
 ```bash
-git clone [repository-url]
+git clone git@github.com:paras-malhotra/cs161-algorithms.git
 cd cs161-algorithms
 conda env create -f environment.yml
-conda activate cs161-env
+conda activate cs161
 ```
 
 ## Running Tests
