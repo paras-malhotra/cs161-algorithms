@@ -34,21 +34,15 @@ class BinaryTree:
 
     def inorder_traversal(self) -> List[int]:
         """ Perform in-order traversal of the tree. """
-        result = []
-        self._inorder_traversal_recursive(self.root, result)
-        return result
+        return [node.key for node in self._inorder_traversal_generator(self.root)]
     
     def preorder_traversal(self) -> List[int]:
         """ Perform pre-order traversal of the tree. """
-        result = []
-        self._preorder_traversal_recursive(self.root, result)
-        return result
+        return [node.key for node in self._preorder_traversal_generator(self.root)]
     
     def postorder_traversal(self) -> List[int]:
         """ Perform post-order traversal of the tree. """
-        result = []
-        self._postorder_traversal_recursive(self.root, result)
-        return result
+        return [node.key for node in self._postorder_traversal_generator(self.root)]
     
     def successor(self, node: Node) -> Optional[Node]:
         """
@@ -139,23 +133,27 @@ class BinaryTree:
                 node.key = successor.key
                 self.delete(successor)
 
-    def _inorder_traversal_recursive(self, node: Optional[Node], result: List[int]):
-        """ Helper method for in-order traversal. """
+    def _inorder_traversal_generator(self, node):
+        """ Generator for in-order traversal. """
         if node is not None:
-            self._inorder_traversal_recursive(node.left, result)
-            result.append(node.key)
-            self._inorder_traversal_recursive(node.right, result)
+            yield from self._inorder_traversal_generator(node.left)
+            yield node
+            yield from self._inorder_traversal_generator(node.right)
 
-    def _preorder_traversal_recursive(self, node: Optional[Node], result: List[int]):
-        """ Helper method for pre-order traversal. """
+    def _preorder_traversal_generator(self, node):
+        """ Generator for pre-order traversal. """
         if node is not None:
-            result.append(node.key)
-            self._preorder_traversal_recursive(node.left, result)
-            self._preorder_traversal_recursive(node.right, result)
+            yield node
+            yield from self._preorder_traversal_generator(node.left)
+            yield from self._preorder_traversal_generator(node.right)
 
-    def _postorder_traversal_recursive(self, node: Optional[Node], result: List[int]):
-        """ Helper method for post-order traversal. """
+    def _postorder_traversal_generator(self, node):
+        """ Generator for post-order traversal. """
         if node is not None:
-            self._postorder_traversal_recursive(node.left, result)
-            self._postorder_traversal_recursive(node.right, result)
-            result.append(node.key)
+            yield from self._postorder_traversal_generator(node.left)
+            yield from self._postorder_traversal_generator(node.right)
+            yield node
+
+    def __iter__(self):
+        """ Iterator for in-order traversal of the tree. """
+        return (node.key for node in self._inorder_traversal_generator(self.root))
