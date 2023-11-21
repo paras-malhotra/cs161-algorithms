@@ -109,7 +109,7 @@ def binary_search_upper_bound(arr: List[T], target: T) -> int:
 
 def binary_search_monotonically_increasing(func: Callable[[float], float], target: float, left: float, right: float, precision: float = 1e-7) -> float:
     """
-    Perform binary search on a monotonically increasing function.
+    Perform binary search on a monotonically increasing function to find its inverse.
 
     Parameters:
         func (Callable[[float], float]): The function to search in, must be monotonically increasing within the search interval.
@@ -119,7 +119,7 @@ def binary_search_monotonically_increasing(func: Callable[[float], float], targe
         precision (float): The precision threshold for termination.
 
     Returns:
-        float: The value of x such that func(x) is closest to the target.
+        float: The value of x such that func(x) is closest to the target (func inverse of target).
 
     Example:
     >>> binary_search_monotonically_increasing(lambda x: x**2, 3, 0, 3)
