@@ -2,7 +2,7 @@ from graph import Graph
 
 def bellman_ford_sssp(graph: Graph, source: str) -> tuple[dict[str, float], dict[str, str]]:
     """
-    Bellman-Ford algorithm for single-source shortest paths. This algorithm does not work with negative-weight cycles.
+    Bellman-Ford algorithm for single-source shortest paths. This algorithm can detect negative-weight cycles.
 
     Parameters:
         graph (Graph): The graph to traverse.
