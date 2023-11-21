@@ -5,12 +5,13 @@ def test_binary_tree_initialization():
     tree = BinaryTree()
     assert tree.root is None
 
-# Test for height of the tree
-def test_binary_tree_height():
+# Test for tree height and node depth
+def test_binary_tree_height_and_depth():
     tree = create_small_tree()
-    tree.root.left.left = Node(4)
+    tree.insert_before(tree.root.left, Node(4))
 
-    assert tree.height() == 3
+    assert tree.height() == 2
+    assert tree.depth_node(tree.root.left.left) == 2
 
 # Test for size of the tree
 def test_binary_tree_size():
