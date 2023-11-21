@@ -13,13 +13,13 @@ class BinaryTree:
     def height_subtree(self, node: Optional[Node]) -> int:
         """ Return the height of the subtree rooted at the given node. """
         if node is None:
-            return 0
+            return -1
         return 1 + max(self.height_subtree(node.left), self.height_subtree(node.right))
     
     def depth_node(self, node: Optional[Node]) -> int:
         """ Return the depth of the given node. """
         if node is None:
-            return 0
+            return -1
         return 1 + self.depth_node(node.parent)
     
     def size(self) -> int:
