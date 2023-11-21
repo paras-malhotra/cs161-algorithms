@@ -5,7 +5,10 @@ from bellman_ford import bellman_ford_sssp  # Replace with the correct import
 @pytest.mark.parametrize("vertices, edges, source, expected_dist, expected_pred", [
     # Basic functionality
     (['A', 'B', 'C', 'D'], [('A', 'B', 1), ('B', 'C', 2), ('C', 'D', 3), ('A', 'D', 10)], 'A', {'A': 0, 'B': 1, 'C': 3, 'D': 6}, {'A': None, 'B': 'A', 'C': 'B', 'D': 'C'}),
+    # Negative weights
     (['A', 'B', 'C'], [('A', 'B', -1), ('B', 'C', -2), ('A', 'C', -2)], 'A', {'A': 0, 'B': -1, 'C': -3}, {'A': None, 'B': 'A', 'C': 'B'}),
+    # Negative weights with positive cycle
+    (['A', 'B', 'C', 'D'], [('A', 'B', -1), ('B', 'C', -2), ('C', 'D', -3), ('D', 'A', 10)], 'A', {'A': 0, 'B': -1, 'C': -3, 'D': -6}, {'A': None, 'B': 'A', 'C': 'B', 'D': 'C'}),
     # Unreachable vertex
     (['A', 'B', 'C', 'D'], [('A', 'B', 1), ('B', 'C', 2)], 'A', {'A': 0, 'B': 1, 'C': 3, 'D': float('inf')}, {'A': None, 'B': 'A', 'C': 'B', 'D': None}),
     # Empty graph
