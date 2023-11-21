@@ -1,6 +1,7 @@
+from typing import Tuple, Dict
 from graph import Graph
 
-def bellman_ford_sssp(graph: Graph, source: str) -> tuple[dict[str, float], dict[str, str]]:
+def bellman_ford_sssp(graph: Graph, source: str) -> Tuple[Dict[str, float], Dict[str, str]]:
     """
     Bellman-Ford algorithm for single-source shortest paths. This algorithm can detect negative-weight cycles.
 
@@ -9,7 +10,7 @@ def bellman_ford_sssp(graph: Graph, source: str) -> tuple[dict[str, float], dict
         source (str): The source vertex.
 
     Returns:
-        tuple[dict[str, float], dict[str, str]]: The shortest distances to all vertices and their predecessors.
+        Tuple[Dict[str, float], Dict[str, str]]: The shortest distances to all vertices and their predecessors.
 
     Time complexity: O(VE) where V is the number of vertices and E is the number of edges.
     Space complexity: O(V) where V is the number of vertices.
