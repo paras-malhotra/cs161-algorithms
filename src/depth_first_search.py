@@ -102,7 +102,7 @@ def topological_sort(graph: Graph) -> List[str]:
     Returns:
         List[str]: A topological ordering of the graph vertices.
 
-    Time complexity: O(V + E)
+    Time complexity: O(V log V + E)
     """
     _, _, finish_times, _ = dfs_helper(graph, None, None)
     return quick_sort(graph.vertices(), comparator=lambda v1, v2: finish_times[v1] > finish_times[v2])
