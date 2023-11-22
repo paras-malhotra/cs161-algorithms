@@ -4,9 +4,9 @@ from floyd_warshall import floyd_warshall_apsp
 from breadth_first_search import bfs_apsp
 from dijkstra import dijkstra_apsp
 
+unweighted_apsp_algorithms = [floyd_warshall_apsp, bfs_apsp, dijkstra_apsp]
 positive_weight_algorithms = [floyd_warshall_apsp, dijkstra_apsp]
 negative_weight_algorithms = [floyd_warshall_apsp]
-unweighted_apsp_algorithms = [floyd_warshall_apsp, bfs_apsp]
 
 @pytest.mark.parametrize("algorithm", unweighted_apsp_algorithms)
 @pytest.mark.parametrize("vertices, edges, expected_dist", [

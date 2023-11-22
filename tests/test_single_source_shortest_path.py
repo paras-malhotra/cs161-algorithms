@@ -4,9 +4,9 @@ from bellman_ford import bellman_ford_sssp
 from breadth_first_search import bfs_sssp
 from dijkstra import dijkstra_sssp
 
+unweighted_algorithms = [bellman_ford_sssp, bfs_sssp, dijkstra_sssp]
 positive_weight_algorithms = [bellman_ford_sssp, dijkstra_sssp]
 negative_weight_sssp_algorithms = [bellman_ford_sssp]
-unweighted_algorithms = [bellman_ford_sssp, bfs_sssp]
 
 @pytest.mark.parametrize("algorithm", unweighted_algorithms)
 @pytest.mark.parametrize("vertices, edges, source, expected_dist, expected_pred", [
