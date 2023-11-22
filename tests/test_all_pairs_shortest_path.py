@@ -4,11 +4,12 @@ from floyd_warshall import floyd_warshall_apsp
 from breadth_first_search import bfs_apsp
 from dijkstra import dijkstra_apsp
 from dag_shortest_path import dag_apsp
+from johnson import johnson_apsp
 
-unweighted_apsp_algorithms = [floyd_warshall_apsp, bfs_apsp, dijkstra_apsp]
-positive_weight_algorithms = [floyd_warshall_apsp, dijkstra_apsp]
-dag_algorithms = [floyd_warshall_apsp, dag_apsp]
-negative_weight_algorithms = [floyd_warshall_apsp]
+unweighted_apsp_algorithms = [floyd_warshall_apsp, johnson_apsp, bfs_apsp, dijkstra_apsp]
+positive_weight_algorithms = [floyd_warshall_apsp, johnson_apsp, dijkstra_apsp]
+dag_algorithms = [floyd_warshall_apsp, johnson_apsp, dag_apsp]
+negative_weight_algorithms = [floyd_warshall_apsp, johnson_apsp]
 
 unweighted_examples = [
     # Simple unweighted graph
