@@ -1,6 +1,7 @@
+from typing import Dict
 from graph import Graph
 
-def floyd_warshall_apsp(graph: Graph) -> dict[str, dict[str, float]]:
+def floyd_warshall_apsp(graph: Graph) -> Dict[str, Dict[str, float]]:
     """
     Floyd-Warshall algorithm for all-pairs shortest paths. This algorithm can detect negative-weight cycles.
 
@@ -8,7 +9,7 @@ def floyd_warshall_apsp(graph: Graph) -> dict[str, dict[str, float]]:
         graph (Graph): The graph to traverse.
 
     Returns:
-        dict[str, dict[str, float]]: The shortest distances between all pairs of vertices.
+        Dict[str, Dict[str, float]]: The shortest distances between all pairs of vertices.
 
     Time complexity: O(V^3) where V is the number of vertices.
     Space complexity: O(V^2) where V is the number of vertices.

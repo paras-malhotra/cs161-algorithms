@@ -63,3 +63,26 @@ def bfs_sssp(graph: Graph, source: str) -> Tuple[Dict[str, float], Dict[str, str
             dist[vertex] = dist[parent] + 1
     pred = breadth_first_search(graph, source, record_distance)
     return dist, pred
+
+def bfs_apsp(graph: Graph) -> Dict[str, Dict[str, int]]:
+    """
+    Breadth-first search (BFS) algorithm for all-pairs shortest paths.
+
+    Parameters:
+        graph (Graph): The graph to traverse.
+
+    Returns:
+        Dict[str, Dict[str, int]]: The shortest distances between all pairs of vertices.
+
+    Time complexity: O(V * (V + E)) where V is the number of vertices and E is the number of edges.
+    Space complexity: O(V^2) where V is the number of vertices.
+
+    >>> graph = Graph(['A', 'B', 'C', 'D'], [('A', 'B'), ('B', 'C'), ('C', 'D')])
+    >>> dist = bfs_apsp(graph)
+    >>> dist['A']['D']
+    3
+    """
+    dist = {}
+    for vertex in graph.vertices():
+        dist[vertex], _ = bfs_sssp(graph, vertex)
+    return dist
