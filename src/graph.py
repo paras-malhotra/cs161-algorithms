@@ -74,6 +74,21 @@ class Graph:
         if self.undirected:
             self.adj_matrix[v2][v1] = float('inf')
 
+    def get_reversed(self) -> 'Graph':
+        """
+        Return a new graph with all edges reversed.
+        """
+        # Create a new Graph instance with the same vertices and no edges
+        reversed_graph = Graph(self.vertices())
+
+        # Iterate over the adjacency matrix and reverse the edges
+        for v1 in self.vertices():
+            for v2, weight in self.adj_matrix[v1].items():
+                if weight != float('inf'):
+                    reversed_graph.add_edge(v2, v1, weight)
+
+        return reversed_graph
+
     def edges(self) -> List[Tuple[str, str, float]]:
         """
         Get all edges in the graph.
