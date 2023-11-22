@@ -15,7 +15,7 @@ def bucket_sort(arr: List[T], k: int, key: Callable[[T], int] = lambda x: x) -> 
     List[T]: The sorted list.
 
     Time Complexity:
-    Average Case: O(n + n^2/k + k), where n is the number of items in the list and k is the number of buckets.
+    Average Case: O(n + k), where n is the number of items in the list and k is the number of buckets.
 
     Example:
     >>> bucket_sort([3, 1, 4, 1, 2], 4, lambda x: x - 1)
