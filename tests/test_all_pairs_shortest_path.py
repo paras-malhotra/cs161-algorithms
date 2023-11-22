@@ -2,8 +2,10 @@ import pytest
 from graph import Graph
 from floyd_warshall import floyd_warshall_apsp
 from breadth_first_search import bfs_apsp
+from dijkstra import dijkstra_apsp
 
-apsp_algorithms = [floyd_warshall_apsp]
+positive_weight_algorithms = [floyd_warshall_apsp, dijkstra_apsp]
+negative_weight_algorithms = [floyd_warshall_apsp]
 unweighted_apsp_algorithms = [floyd_warshall_apsp, bfs_apsp]
 
 @pytest.mark.parametrize("algorithm", unweighted_apsp_algorithms)
@@ -18,23 +20,35 @@ def test_apsp_unweighted_graphs(algorithm, vertices, edges, expected_dist):
     dist = algorithm(graph)
     assert dist == expected_dist
 
-@pytest.mark.parametrize("algorithm", apsp_algorithms)
+@pytest.mark.parametrize("algorithm", positive_weight_algorithms)
 @pytest.mark.parametrize("vertices, edges, expected_dist", [
     # Basic functionality
     (['A', 'B', 'C', 'D'], [('A', 'B', 1), ('B', 'C', 2), ('C', 'D', 3)], {'A': {'A': 0, 'B': 1, 'C': 3, 'D': 6}, 'B': {'B': 0, 'C': 2, 'D': 5, 'A': float('inf')}, 'C': {'C': 0, 'D': 3, 'A': float('inf'), 'B': float('inf')}, 'D': {'D': 0, 'A': float('inf'), 'B': float('inf'), 'C': float('inf')}}),
-    # Negative weights with positive cycle
-    (['A', 'B', 'C', 'D'], [('A', 'B', -1), ('B', 'C', -2), ('C', 'D', -3), ('D', 'A', 10)], {'A': {'A': 0, 'B': -1, 'C': -3, 'D': -6}, 'B': {'B': 0, 'C': -2, 'D': -5, 'A': 5}, 'C': {'C': 0, 'D': -3, 'A': 7, 'B': 6}, 'D': {'D': 0, 'A': 10, 'B': 9, 'C': 7}}),
+    # Complete graph
+    (['A', 'B', 'C', 'D'], [('A', 'B', 4), ('A', 'C', 1), ('A', 'D', 5), ('B', 'C', 2), ('B', 'D', 6), ('C', 'D', 3)], {'A': {'A': 0, 'B': 4, 'C': 1, 'D': 4}, 'B': {'A': float('inf'), 'B': 0, 'C': 2, 'D': 5}, 'C': {'A': float('inf'), 'B': float('inf'), 'C': 0, 'D': 3}, 'D': {'A': float('inf'), 'B': float('inf'), 'C': float('inf'), 'D': 0}}),
+    # Star graph
+    (['A', 'B', 'C', 'D', 'E'], [('A', 'B', 3), ('A', 'C', 2), ('A', 'D', 4), ('A', 'E', 5)], {'A': {'A': 0, 'B': 3, 'C': 2, 'D': 4, 'E': 5}, 'B': {'A': float('inf'), 'B': 0, 'C': float('inf'), 'D': float('inf'), 'E': float('inf')}, 'C': {'A': float('inf'), 'B': float('inf'), 'C': 0, 'D': float('inf'), 'E': float('inf')}, 'D': {'A': float('inf'), 'B': float('inf'), 'C': float('inf'), 'D': 0, 'E': float('inf')}, 'E': {'A': float('inf'), 'B': float('inf'), 'C': float('inf'), 'D': float('inf'), 'E': 0}}),
     # Unreachable vertex
     (['A', 'B', 'C', 'D'], [('A', 'B', 1), ('B', 'C', 2)], {'A': {'A': 0, 'B': 1, 'C': 3, 'D': float('inf')}, 'B': {'B': 0, 'C': 2, 'D': float('inf'), 'A': float('inf')}, 'C': {'C': 0, 'A': float('inf'), 'B': float('inf'), 'D': float('inf')}, 'D': {'D': 0, 'A': float('inf'), 'B': float('inf'), 'C': float('inf')}}),
-    # Negative-weight edges
-    (['A', 'B', 'C'], [('A', 'B', -1), ('B', 'C', -2)], {'A': {'A': 0, 'B': -1, 'C': -3}, 'B': {'B': 0, 'C': -2, 'A': float('inf')}, 'C': {'C': 0, 'A': float('inf'), 'B': float('inf')}}),
 ])
-def test_apsp(algorithm, vertices, edges, expected_dist):
+def test_positive_weight_apsp(algorithm, vertices, edges, expected_dist):
     graph = Graph(vertices, edges)
     dist = algorithm(graph)
     assert dist == expected_dist
 
-@pytest.mark.parametrize("algorithm", apsp_algorithms)
+@pytest.mark.parametrize("algorithm", negative_weight_algorithms)
+@pytest.mark.parametrize("vertices, edges, expected_dist", [
+    # Negative weights with positive cycle
+    (['A', 'B', 'C', 'D'], [('A', 'B', -1), ('B', 'C', -2), ('C', 'D', -3), ('D', 'A', 10)], {'A': {'A': 0, 'B': -1, 'C': -3, 'D': -6}, 'B': {'B': 0, 'C': -2, 'D': -5, 'A': 5}, 'C': {'C': 0, 'D': -3, 'A': 7, 'B': 6}, 'D': {'D': 0, 'A': 10, 'B': 9, 'C': 7}}),
+    # Negative-weight edges
+    (['A', 'B', 'C'], [('A', 'B', -1), ('B', 'C', -2)], {'A': {'A': 0, 'B': -1, 'C': -3}, 'B': {'B': 0, 'C': -2, 'A': float('inf')}, 'C': {'C': 0, 'A': float('inf'), 'B': float('inf')}}),
+])
+def test_negative_weight_apsp(algorithm, vertices, edges, expected_dist):
+    graph = Graph(vertices, edges)
+    dist = algorithm(graph)
+    assert dist == expected_dist
+
+@pytest.mark.parametrize("algorithm", negative_weight_algorithms)
 @pytest.mark.parametrize("vertices, edges", [
     # Negative-weight cycle
     (['A', 'B', 'C'], [('A', 'B', -1), ('B', 'C', -2), ('C', 'A', -3)]),
