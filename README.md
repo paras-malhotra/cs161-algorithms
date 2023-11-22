@@ -63,7 +63,7 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 |----------------------|-----------------|------------------|-------------------|--------|------------------|------------------|--------------------------|------|
 | Breadth-First Search | O(V + E)        | O(V)             | ✅                | ✅    | ❌              | ❌               | ❌                      | [Link](src/breadth_first_search.py) |
 | DAG Shortest Path    | O(V + E)        | O(V)             | ✅                | ❌    | ✅              | ✅               | ❌                      | [Link](src/dag_shortest_path.py) |
-| Dijkstra             | O(V + E log V)  | O(V)             | ✅                | ✅    | ✅              | ❌               | ❌                      | [Link](src/dijkstra.py) |
+| Dijkstra             | O(V log V + E)  | O(V)             | ✅                | ✅    | ✅              | ❌               | ❌                      | [Link](src/dijkstra.py) |
 | Bellman-Ford         | O(VE)           | O(V)             | ✅                | ✅    | ✅              | ✅               | ✅                      | [Link](src/bellman_ford.py) |
 
 \* V: Number of vertices, E: Number of edges
@@ -72,9 +72,10 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 
 | Algorithm            | Time Complexity             | Space Complexity | Unweighted Graphs | Cyclic | Positive Weights | Negative Weights | Negative Cycle Detection | Link |
 |----------------------|-----------------------------|------------------|-------------------|--------|------------------|------------------|--------------------------|------|
-| Breadth-First Search | O(V(V + E))                 | O(V<sup>2</sup>) | ✅                | ✅    | ❌              | ❌               | ❌                      | [Link](src/breadth_first_search.py) |
-| DAG Shortest Path    | O(V(V + E))                 | O(V<sup>2</sup>) | ✅                | ❌    | ✅              | ✅               | ❌                      | [Link](src/dag_shortest_path.py) |
-| Dijkstra             | O(V<sup>2</sup> + VE log V) | O(V<sup>2</sup>) | ✅                | ✅    | ✅              | ❌               | ❌                      | [Link](src/dijkstra.py) |
+| Breadth-First Search | O(V<sup>2</sup> + VE)       | O(V<sup>2</sup>) | ✅                | ✅    | ❌              | ❌               | ❌                      | [Link](src/breadth_first_search.py) |
+| DAG Shortest Path    | O(V<sup>2</sup> + VE)       | O(V<sup>2</sup>) | ✅                | ❌    | ✅              | ✅               | ❌                      | [Link](src/dag_shortest_path.py) |
+| Dijkstra             | O(V<sup>2</sup> log V + VE) | O(V<sup>2</sup>) | ✅                | ✅    | ✅              | ❌               | ❌                      | [Link](src/dijkstra.py) |
+| Johnson              | O(V<sup>2</sup> log V + VE) | O(V<sup>2</sup>) | ✅                | ✅    | ✅              | ✅               | ✅                      | [Link](src/johnson.py) |
 | Floyd-Warshall       | O(V<sup>3</sup>)            | O(V<sup>2</sup>) | ✅                | ✅    | ✅              | ✅               | ✅                      | [Link](src/floyd_warshall.py) |
 
 \* V: Number of vertices, E: Number of edges
