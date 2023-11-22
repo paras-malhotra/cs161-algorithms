@@ -1,15 +1,15 @@
-from typing import Dict, Optional, TypeVar
-from binary_heap import MinHeap
+from typing import Dict, TypeVar, Callable
+from binary_heap import BinaryHeap
 
 T = TypeVar('T')
 
-class PriorityQueue(MinHeap):
+class PriorityQueue(BinaryHeap):
     """
     Priority queue implemented as a binary heap. Note that this implementation is not as efficient as a Fibonacci heap for Dijkstra's algorithm.
     """
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, comparator: Callable[[T, T], bool] = lambda x, y: x < y):
+        super().__init__(comparator)
         self.position_map: Dict[T, int] = {}
 
     def insert(self, item: T):
@@ -54,7 +54,7 @@ class PriorityQueue(MinHeap):
             raise IndexError("Extract from empty heap")
 
         del self.position_map[self.peek()]
-        min = super().extract_min()
+        min = super().extract_top()
         if self.size() > 0:
             self.position_map[self.peek()] = 0
         return min
@@ -68,3 +68,11 @@ class PriorityQueue(MinHeap):
         self.position_map[self.heap[i]] = j
         self.position_map[self.heap[j]] = i
         self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
+
+    def is_empty(self) -> bool:
+        """
+        Checks if the priority queue is empty.
+
+        Time complexity: O(1)
+        """
+        return self.size() == 0
