@@ -40,10 +40,10 @@ def depth_first_search_entire_graph(graph: Graph, callback: Optional[Callable[[s
     >>> depth_first_search_entire_graph(graph)
     {'u': (1, 8, 0), 'v': (2, 7, 0), 'w': (9, 12, 1), 'x': (3, 6, 0), 'y': (4, 5, 0), 'z': (10, 11, 1)}
     """
-    visited, start_times, finish_times, component_numbers = dfs_helper(graph, None, callback, True)
+    visited, start_times, finish_times, component_numbers = dfs_helper(graph, None, callback)
     return {vertex: (start_times[vertex], finish_times[vertex], component_numbers[vertex]) for vertex in visited}
 
-def dfs_helper(graph: Graph, start: Optional[str], callback: Optional[Callable[[str, Optional[str]], None]], entire_graph=False) -> Tuple[Dict[str, bool], Dict[str, int], Dict[str, int], Optional[Dict[str, int]]]:
+def dfs_helper(graph: Graph, start: Optional[str] = None, callback: Optional[Callable[[str, Optional[str]], None]] = None) -> Tuple[Dict[str, bool], Dict[str, int], Dict[str, int], Optional[Dict[str, int]]]:
     """
     Helper function for depth-first search.
 
@@ -51,7 +51,6 @@ def dfs_helper(graph: Graph, start: Optional[str], callback: Optional[Callable[[
         graph (Graph): The graph to search.
         start (Optional[str]): The starting vertex, or None to search the entire graph.
         callback (Optional[Callable]): Optional callback function for each visited vertex.
-        entire_graph (bool): Whether to search the entire graph.
 
     Returns:
         Tuple: Visited status, start times, finish times, and (optionally) component numbers.
@@ -83,7 +82,7 @@ def dfs_helper(graph: Graph, start: Optional[str], callback: Optional[Callable[[
         time += 1
         finish_times[vertex] = time
 
-    if entire_graph:
+    if start is None:
         for vertex in graph.vertices():
             if not visited[vertex]:
                 dfs_visit(vertex, None)
@@ -91,9 +90,9 @@ def dfs_helper(graph: Graph, start: Optional[str], callback: Optional[Callable[[
     else:
         dfs_visit(start, None)
 
-    return visited, start_times, finish_times, component_numbers if entire_graph else None
+    return visited, start_times, finish_times, component_numbers if start is None else None
 
-def topological_sort(graph: Graph) -> Optional[List[str]]:
+def topological_sort(graph: Graph) -> List[str]:
     """
     Topological sort of a directed acyclic graph (DAG).
 
@@ -101,9 +100,9 @@ def topological_sort(graph: Graph) -> Optional[List[str]]:
         graph (Graph): The graph to sort.
 
     Returns:
-        Optional[List[str]]: A topological ordering of the graph vertices.
+        List[str]: A topological ordering of the graph vertices.
 
     Time complexity: O(V + E)
     """
-    _, _, finish_times, _ = dfs_helper(graph, None, None, True)
+    _, _, finish_times, _ = dfs_helper(graph, None, None)
     return quick_sort(graph.vertices(), comparator=lambda v1, v2: finish_times[v1] > finish_times[v2])

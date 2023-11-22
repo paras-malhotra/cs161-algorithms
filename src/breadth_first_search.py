@@ -2,16 +2,14 @@ from typing import Dict, Callable, Optional, Tuple
 from graph import Graph
 from linked_queue import Queue
 
-def breadth_first_search(graph: Graph, start: str, callback: Optional[Callable[[str, Optional[str]], None]] = None) -> Dict[str, str]:
+def breadth_first_search(graph: Graph, start: Optional[str] = None, callback: Optional[Callable[[str, Optional[str]], None]] = None) -> Dict[str, str]:
     """
-    Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures.
-    It starts at the tree root (or some arbitrary node of a graph) and explores the neighbor nodes first,
-    before moving to the next level neighbors.
+    Breadth-first search (BFS) for traversing or searching graph data structures.
 
     Arguments:
         graph (Graph): Graph to search.
-        start (str): Starting vertex.
-        callback (Optional[Callable[[str, Optional[str]], None]]): Optional callback function to be called when a vertex is visited.
+        start (Optional[str]): The starting vertex, or None to search the entire graph.
+        callback (Optional[Callable[[str, Optional[str]], None]]): Optional callback function for each visited vertex.
 
     Returns:
         Dict[str, str]: A dictionary containing the parent of each vertex in the graph.
@@ -20,18 +18,28 @@ def breadth_first_search(graph: Graph, start: str, callback: Optional[Callable[[
     """
     visited = {vertex: False for vertex in graph.vertices()}
     parents = {vertex: None for vertex in graph.vertices()}
-    queue = Queue()
-    queue.enqueue(start)
-    while not queue.is_empty():
-        vertex = queue.dequeue()
-        if not visited[vertex]:
-            visited[vertex] = True
-            if callback:
-                callback(vertex, parents[vertex])
-            for neighbor, _ in graph.neighbors(vertex):
-                if not visited[neighbor]:
-                    queue.enqueue(neighbor)
-                    parents[neighbor] = vertex
+
+    def bfs_from_vertex(vertex: str):
+        queue = Queue()
+        queue.enqueue(vertex)
+
+        while not queue.is_empty():
+            current = queue.dequeue()
+            if not visited[current]:
+                visited[current] = True
+                if callback:
+                    callback(current, parents[current])
+                for neighbor, _ in graph.neighbors(current):
+                    if not visited[neighbor]:
+                        queue.enqueue(neighbor)
+                        parents[neighbor] = current
+
+    if start is None:
+        for vertex in graph.vertices():
+            if not visited[vertex]:
+                bfs_from_vertex(vertex)
+    else:
+        bfs_from_vertex(start)
 
     return parents
 
@@ -86,3 +94,43 @@ def bfs_apsp(graph: Graph) -> Dict[str, Dict[str, int]]:
     for vertex in graph.vertices():
         dist[vertex], _ = bfs_sssp(graph, vertex)
     return dist
+
+def check_bipartite(graph: Graph) -> bool:
+    """
+    A graph is bipartite if its vertices can be divided into two independent sets (or, equivalently, two color classes)
+    such that every edge connects a vertex in one set with a vertex in the other set. The graph is assumed to be connected.
+
+    Parameters:
+        graph (Graph): The graph to check.
+
+    Returns:
+        bool: True if the graph is bipartite, False otherwise.
+
+    Time complexity: O(V + E) where V is the number of vertices and E is the number of edges.
+    Space complexity: O(V) where V is the number of vertices.
+
+    >>> graph = Graph(['A', 'B', 'C', 'D'], [('A', 'B'), ('B', 'C'), ('C', 'D')])
+    >>> check_bipartite(graph)
+    True
+    >>> graph = Graph(['A', 'B', 'C', 'D'], [('A', 'B'), ('B', 'C'), ('C', 'D'), ('A', 'D')])
+    >>> check_bipartite(graph)
+    True
+    >>> graph = Graph(['A', 'B', 'C', 'D'], [('A', 'B'), ('B', 'C'), ('C', 'D'), ('A', 'C')])
+    >>> check_bipartite(graph)
+    False
+    """
+    # Initialize color dictionary
+    colors = {vertex: None for vertex in graph.vertices()}
+
+    def color(vertex: str, parent: Optional[str]) -> None:
+        # Color the vertex the opposite color of its parent
+        colors[vertex] = 0 if (parent is None or colors[parent] == 1) else 1
+
+    breadth_first_search(graph, None, color)
+
+    # Check for an edge between two vertices of the same color
+    for u, v, _ in graph.edges():
+        if colors[u] == colors[v]:
+            return False
+
+    return True
