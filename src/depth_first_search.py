@@ -43,7 +43,7 @@ def depth_first_search_entire_graph(graph: Graph, callback: Optional[Callable[[s
     visited, start_times, finish_times, component_numbers = dfs_helper(graph, None, callback)
     return {vertex: (start_times[vertex], finish_times[vertex], component_numbers[vertex]) for vertex in visited}
 
-def dfs_helper(graph: Graph, start: Optional[str], callback: Optional[Callable[[str, Optional[str]], None]]) -> Tuple[Dict[str, bool], Dict[str, int], Dict[str, int], Optional[Dict[str, int]]]:
+def dfs_helper(graph: Graph, start: Optional[str] = None, callback: Optional[Callable[[str, Optional[str]], None]] = None) -> Tuple[Dict[str, bool], Dict[str, int], Dict[str, int], Optional[Dict[str, int]]]:
     """
     Helper function for depth-first search.
 
@@ -92,7 +92,7 @@ def dfs_helper(graph: Graph, start: Optional[str], callback: Optional[Callable[[
 
     return visited, start_times, finish_times, component_numbers if start is None else None
 
-def topological_sort(graph: Graph) -> Optional[List[str]]:
+def topological_sort(graph: Graph) -> List[str]:
     """
     Topological sort of a directed acyclic graph (DAG).
 
@@ -100,7 +100,7 @@ def topological_sort(graph: Graph) -> Optional[List[str]]:
         graph (Graph): The graph to sort.
 
     Returns:
-        Optional[List[str]]: A topological ordering of the graph vertices.
+        List[str]: A topological ordering of the graph vertices.
 
     Time complexity: O(V + E)
     """

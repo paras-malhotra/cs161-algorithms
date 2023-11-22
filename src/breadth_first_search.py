@@ -2,7 +2,7 @@ from typing import Dict, Callable, Optional, Tuple
 from graph import Graph
 from linked_queue import Queue
 
-def breadth_first_search(graph: Graph, start: Optional[str], callback: Optional[Callable[[str, Optional[str]], None]]) -> Dict[str, str]:
+def breadth_first_search(graph: Graph, start: Optional[str] = None, callback: Optional[Callable[[str, Optional[str]], None]] = None) -> Dict[str, str]:
     """
     Breadth-first search (BFS) for traversing or searching graph data structures.
 
