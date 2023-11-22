@@ -106,3 +106,42 @@ def topological_sort(graph: Graph) -> List[str]:
     """
     _, _, finish_times, _ = dfs_helper(graph, None, None)
     return quick_sort(graph.vertices(), comparator=lambda v1, v2: finish_times[v1] > finish_times[v2])
+
+def get_strongly_connected_components(graph: Graph) -> List[List[str]]:
+    """
+    Finds strongly connected components in a directed graph using Kosaraju's algorithm.
+
+    Parameters:
+        graph (Graph): The graph to find SCCs in.
+
+    Returns:
+        List[List[str]]: A list of strongly connected components.
+
+    Time complexity: O(V + E)
+    """
+    # First pass: Run DFS on the graph and store vertices by finish times
+    _, _, finish_times, _ = dfs_helper(graph, None, None)
+    vertices_by_finish_time = quick_sort(graph.vertices(), comparator=lambda v1, v2: finish_times[v1] > finish_times[v2])
+
+    # Reverse the graph
+    reversed_graph = graph.get_reversed()
+
+    # Second pass: Run DFS on the reversed graph in order of decreasing finish times
+    visited = {vertex: False for vertex in graph.vertices()}
+    current_scc = []
+    sccs = []
+
+    def collect_scc(vertex: str, _: Optional[str]):
+        nonlocal current_scc
+        if visited[vertex]:
+            return
+        visited[vertex] = True
+        current_scc.append(vertex)
+
+    for vertex in vertices_by_finish_time:
+        if not visited[vertex]:
+            current_scc = []
+            dfs_helper(reversed_graph, vertex, collect_scc)
+            sccs.append(current_scc)
+
+    return sccs
