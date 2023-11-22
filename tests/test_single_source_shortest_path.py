@@ -1,7 +1,7 @@
 import pytest
 from graph import Graph
 from bellman_ford import bellman_ford_sssp
-from bfs import bfs_sssp
+from breadth_first_search import bfs_sssp
 
 sssp_algorithms = [bellman_ford_sssp]
 unweighted_algorithms = [bellman_ford_sssp, bfs_sssp]
