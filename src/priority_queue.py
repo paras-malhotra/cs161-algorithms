@@ -5,9 +5,7 @@ T = TypeVar('T')
 
 class PriorityQueue(MinHeap):
     """
-    A priority queue implemented as a min heap.
-    This class extends the MinHeap and provides additional functionality
-    needed for algorithms like Dijkstra's.
+    Priority queue implemented as a binary heap. Note that this implementation is not as efficient as a Fibonacci heap for Dijkstra's algorithm.
     """
 
     def __init__(self):
@@ -16,8 +14,9 @@ class PriorityQueue(MinHeap):
 
     def insert(self, item: T):
         """
-        Inserts an item into the priority queue.
-        Updates the position map for the new item.
+        Inserts an item into the priority queue and updates the position map for the new item.
+
+        Time complexity: O(log n) where n is the number of items in the priority queue.
         """
         self.position_map[item] = len(self.heap)
         super().insert(item)
@@ -29,6 +28,8 @@ class PriorityQueue(MinHeap):
         Parameters:
             item (T): The item whose key is to be decreased.
             new_value (T): The new value for the key.
+
+        Time complexity: O(log n) where n is the number of items in the priority queue.
         """
         if item not in self.position_map:
             raise ValueError("Invalid operation")
@@ -45,8 +46,9 @@ class PriorityQueue(MinHeap):
 
     def extract_min(self) -> T:
         """
-        Extracts the minimum item from the priority queue.
-        Updates the position map accordingly.
+        Extracts the minimum item from the priority queue and updates the position map accordingly.
+
+        Time complexity: O(log n) where n is the number of items in the priority queue.
         """
         if self.size() == 0:
             raise IndexError("Extract from empty heap")
@@ -60,6 +62,8 @@ class PriorityQueue(MinHeap):
     def swap(self, i: int, j: int):
         """
         Swaps two elements in the heap using their indices.
+
+        Time complexity: O(1)
         """
         self.position_map[self.heap[i]] = j
         self.position_map[self.heap[j]] = i
