@@ -36,24 +36,24 @@ pytest
 | Bucket Sort   | O(n+k)            | O(n+k)               | O(n<sup>2</sup>)   | O(n+k)           | ❌      | ✅    | Other        | Large, uniformly distributed datasets | [Link](src/bucket_sort.py) |
 | Radix Sort    | O(d(n+r))         | O(d(n+r))            | O(d(n+r))          | O(d(n+r))        | ❌      | ✅    | Other        | Large data sets with fixed-length keys | [Link](src/radix_sort.py) |
 
-\* Heap sort's current implementation is not O(1) but rather O(n). However, it can be made O(1) if the underlying heap array is shared with the input data.
+\* Heap sort's implementation in this repository is not O(1) but rather O(n). However, there is an O(1) implementation.
 
 Note: Even though all algorithms can be modified to become stable, it may affect space complexity.
 
 ## Data Structures
 
-| Data Structure           | Seq. Access | Search      | Insert         | Delete        | Extract Min | Type       | Link |
-|--------------------------|-------------|-------------|----------------|---------------|-------------|------------|------|
-| Linked List              | O(n)        | O(n)        | O(1)           | O(n)          | N/A         | Linear     | [Link](src/linked_list.py) |
-| Stack                    | O(n)        | O(n)        | O(1)           | O(1)          | N/A         | Linear     | Todo |
-| Queue                    | O(n)        | O(n)        | O(1)           | O(1)          | N/A         | Linear     | [Link](src/queue.py) |
-| Unsorted Array           | O(1)        | O(n)        | O(1)\*         | O(n)          | N/A         | Linear     | Native |
-| Sorted Array             | O(1)        | O(log n)    | O(n)           | O(n)          | N/A         | Linear     | Native |
-| Hash Table               | N/A         | O(1)\*      | O(1)\*         | O(1)\*        | N/A         | Hash-based | [Link](src/hash_table.py) |
-| Binary Heap              | O(n)        | O(n)        | O(log n)       | O(log n)      | O(log n)    | Tree       | [Link](src/binary_heap.py) |
-| Priority Queue           | O(n)        | O(n)        | O(log n)       | O(log n)      | O(log n)    | Tree       | [Link](src/priority_queue.py) |
-| AVL Tree (BST)           | O(log n)    | O(log n)    | O(log n)       | O(log n)      | N/A         | Tree       | [Link](src/avl_tree.py) |
-| Red Black Tree  (BST)    | O(log n)    | O(log n)    | O(log n)       | O(log n)      | N/A         | Tree       | Todo |
+| Data Structure           | Seq. Access | Search      | Insert         | Delete        | Extract Min | Type       | Link                        |
+|--------------------------|-------------|-------------|----------------|---------------|-------------|------------|-----------------------------|
+| Linked List              | O(n)        | O(n)        | O(1)           | O(n)          | N/A         | Linear     | [Link](src/linked_list.py)  |
+| Stack                    | O(n)        | O(n)        | O(1)           | O(1)          | N/A         | Linear     | Todo                        |
+| Queue                    | O(n)        | O(n)        | O(1)           | O(1)          | N/A         | Linear     | [Link](src/linked_queue.py) |
+| Unsorted Array           | O(1)        | O(n)        | O(1)\*         | O(n)          | N/A         | Linear     | Native                      |
+| Sorted Array             | O(1)        | O(log n)    | O(n)           | O(n)          | N/A         | Linear     | Native                      |
+| Hash Table               | N/A         | O(1)\*      | O(1)\*         | O(1)\*        | N/A         | Hash-based | Todo                        |
+| Binary Heap              | O(n)        | O(n)        | O(log n)       | O(log n)      | O(log n)    | Tree       | [Link](src/binary_heap.py)  |
+| Priority Queue           | O(n)        | O(n)        | O(log n)       | O(log n)      | O(log n)    | Tree       | [Link](src/priority_queue.py)|
+| AVL Tree (BST)           | O(log n)    | O(log n)    | O(log n)       | O(log n)      | N/A         | Tree       | [Link](src/avl_tree.py)     |
+| Red Black Tree  (BST)    | O(log n)    | O(log n)    | O(log n)       | O(log n)      | N/A         | Tree       | Todo                        |
 
 \* Amortized time complexity
 
