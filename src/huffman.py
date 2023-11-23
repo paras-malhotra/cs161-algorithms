@@ -4,6 +4,19 @@ from tree_node import Node
 from binary_tree import BinaryTree
 
 class HuffmanCode:
+    """
+    Implements Huffman coding for efficient data compression using binary trees.
+
+    Examples:
+    >>> huffman = HuffmanCode()
+    >>> tree, codes, encoded = huffman.encode('abbcccddddeeeeeffffff')
+    >>> encoded
+    '101010111011100100100000000000101010101111111111111'
+    >>> codes
+    {'d': '00', 'e': '01', 'c': '100', 'a': '1010', 'b': '1011', 'f': '11'}
+    >>> huffman.decode(codes, encoded)
+    'abbcccddddeeeeeffffff'
+    """
     def __init__(self):
         self.freq: Dict[str, int] = {}
         self.code: Dict[str, str] = {}
@@ -12,11 +25,17 @@ class HuffmanCode:
         """
         Generate Huffman prefix codes for the given string.
 
-        Args:
+        Parameters:
             s (str): The input string to be encoded.
 
         Returns:
-            Tuple[BinaryTree, Dict[str, str], str]: A tuple containing the Huffman tree, a dictionary of codes for each character, and the encoded string.
+            Tuple[BinaryTree, Dict[str, str], str]: A tuple containing:
+                - The constructed Huffman tree.
+                - A dictionary of Huffman codes for each character.
+                - The encoded string as a sequence of bits.
+
+        Time complexity: O(n log n) where n is the length of the input string.
+        Space complexity: O(n) where n is the length of the input string.
         """
         # Return empty tree and codes for empty string
         if len(s) == 0:
@@ -61,9 +80,9 @@ class HuffmanCode:
 
     def decode(self, codes: Dict[str, str], s: str) -> str:
         """
-        Decode a Huffman-encoded string.
+        Decodes a Huffman-encoded string.
 
-        Args:
+        Parameters:
             codes (Dict[str, str]): A dictionary of codes for each character.
             s (str): The Huffman-encoded string.
 
@@ -91,9 +110,9 @@ class HuffmanCode:
 
     def decode_by_tree(self, tree: BinaryTree, s: str) -> str:
         """
-        Decode a Huffman-encoded string.
+        Decodes a Huffman-encoded string using the Huffman tree.
 
-        Args:
+        Parameters:
             tree (BinaryTree): The Huffman tree.
             s (str): The Huffman-encoded string.
 
