@@ -81,11 +81,10 @@ class Graph:
         # Create a new Graph instance with the same vertices and no edges
         reversed_graph = Graph(self.vertices())
 
-        # Iterate over the adjacency matrix and reverse the edges
-        for v1 in self.vertices():
-            for v2, weight in self.adj_matrix[v1].items():
-                if weight != float('inf'):
-                    reversed_graph.add_edge(v2, v1, weight)
+        # Iterate over all edges in the graph
+        for u, v, weight in self.edges():
+            # Add the edge in the reversed graph
+            reversed_graph.add_edge(v, u, weight)
 
         return reversed_graph
 
