@@ -2,9 +2,9 @@ from typing import Optional, List
 from tree_node import Node
 
 class BinaryTree:
-    def __init__(self):
+    def __init__(self, root: Optional[Node] = None):
         """ Initialize an empty binary tree. """
-        self.root: Optional[Node] = None
+        self.root: Optional[Node] = root
 
     def height(self) -> int:
         """ Return the height of the tree. """

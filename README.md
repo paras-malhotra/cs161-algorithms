@@ -102,6 +102,7 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 | Unbounded Knapsack         | O(nW)                | O(W)             | Dynamic Programming     | Dynamic resource allocation          | [Link](src/knapsack.py)                   |
 | 0/1 Knapsack               | O(nW)                | O(nW)            | Dynamic Programming     | Resource allocation with constraints | [Link](src/knapsack.py)                   |
 | Longest Common Subsequence | O(mn)                | O(mn)            | Dynamic Programming     | Text comparison, DNA sequencing      | [Link](src/longest_common_subsequence.py) |
+| Huffman Coding             | O(n log n)           | O(n)             | Greedy                  | Data compression, encoding schemes   | [Link](src/huffman.py)                    |
 
 ## Contributing
 Contributions are welcome! Feel free to submit issues and pull requests (with unit tests if possible).
