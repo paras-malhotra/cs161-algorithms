@@ -1,6 +1,8 @@
 from typing import Tuple, Optional, Set, FrozenSet
 from graph import Graph
 from priority_queue import PriorityQueue
+from union_find import UnionFind
+from quick_sort import quick_sort
 
 def prims_mst (graph: Graph, start_vertex: Optional[str] = None) -> Tuple[Set[FrozenSet[str]], float]:
     """
@@ -55,5 +57,53 @@ def prims_mst (graph: Graph, start_vertex: Optional[str] = None) -> Tuple[Set[Fr
             for neighbor, w in graph.neighbors(v2):
                 if neighbor not in connected:
                     pq.insert((w, v2, neighbor))
+
+    return mst_edges, total_weight
+
+def kruskals_mst(graph: Graph) -> Tuple[Set[FrozenSet[str]], float]:
+    """
+    Compute the minimum spanning tree using Kruskal's algorithm.
+
+    Parameters:
+        graph (Graph): The graph on which to compute the MST.
+
+    Returns:
+        Tuple[Set[FrozenSet[str]], float]: A tuple containing a set of frozensets representing the edges in the MST and the total weight of the MST.
+
+    Time complexity: O(E log E) or O(E log V), where E is the number of edges and V is the number of vertices.
+    Space complexity: O(V + E) where V is the number of vertices and E is the number of edges.
+
+    Example:
+    >>> graph = Graph(['A', 'B', 'C', 'D'], [('A', 'B', 10), ('B', 'C', 1), ('C', 'D', 2), ('D', 'A', 5)], True)
+    >>> mst, weight = kruskals_mst(graph)
+    >>> mst
+    {frozenset({'C', 'B'}), frozenset({'D', 'C'}), frozenset({'A', 'D'})}
+    >>> weight
+    8
+    """
+    if not graph.undirected:
+        raise ValueError('Graph must be undirected')
+
+    # Initialize Union-Find data structure
+    uf = UnionFind()
+    for vertex in graph.vertices():
+        # All vertices are initially in their own set
+        uf.make_set(vertex)
+
+    # Sort edges by weight
+    edges = quick_sort(graph.edges(), comparator=lambda e1, e2: e1[2] < e2[2])
+
+    mst_edges = set()
+    total_weight = 0.0
+    num_vertices = len(graph.vertices())
+
+    for v1, v2, weight in edges:
+        if not uf.connected(v1, v2):
+            uf.union(v1, v2)
+            mst_edges.add(frozenset({v1, v2}))
+            total_weight += weight
+            if len(mst_edges) == num_vertices - 1:
+                # Early exit if we have found all edges as MST has exactly V - 1 edges
+                break
 
     return mst_edges, total_weight
