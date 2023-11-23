@@ -1,5 +1,8 @@
 # CS161 Algorithms 🚀
 
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/paras-malhotra/cs161-algorithms/tests.yml?style=flat-square&logo=github&label=Tests)
+
+
 ## Overview
 This repository contains Python implementations of algorithms covered in Stanford's CS161 course and comprehensive unit tests using pytest.
 
