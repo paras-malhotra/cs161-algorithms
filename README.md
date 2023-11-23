@@ -42,19 +42,19 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 
 ## Data Structures
 
-| Data Structure           | Seq. Access | Search      | Insert         | Delete        | Extract Min | Type        | Link                        |
-|--------------------------|-------------|-------------|----------------|---------------|-------------|-------------|-----------------------------|
-| Linked List              | O(n)        | O(n)        | O(1)           | O(n)          | N/A         | Linear      | [Link](src/linked_list.py)  |
-| Stack                    | O(n)        | O(n)        | O(1)           | O(1)          | N/A         | Linear      | Todo                        |
-| Queue                    | O(n)        | O(n)        | O(1)           | O(1)          | N/A         | Linear      | [Link](src/linked_queue.py) |
-| Unsorted Array           | O(1)        | O(n)        | O(1)\*         | O(n)          | N/A         | Linear      | Native                      |
-| Sorted Array             | O(1)        | O(log n)    | O(n)           | O(n)          | N/A         | Linear      | Native                      |
-| Hash Table               | N/A         | O(1)\*      | O(1)\*         | O(1)\*        | N/A         | Hash-based  | Todo                        |
-| Binary Heap              | O(n)        | O(n)        | O(log n)       | O(log n)      | O(log n)    | Tree        | [Link](src/binary_heap.py)  |
-| Priority Queue           | O(n)        | O(n)        | O(log n)       | O(log n)      | O(log n)    | Tree        | [Link](src/priority_queue.py)|
-| AVL Tree (BST)           | O(log n)    | O(log n)    | O(log n)       | O(log n)      | N/A         | Tree        | [Link](src/avl_tree.py)     |
-| Red Black Tree  (BST)    | O(log n)    | O(log n)    | O(log n)       | O(log n)      | N/A         | Tree        | Todo                        |
-| Union Find               | N/A         | N/A         | N/A            | N/A           | N/A         | Disjoint Set| [Link](src/union_find.py)   |
+| Data Structure           | Seq. Access | Search      | Insert     | Delete     | Extract Min | Union | Type        | Link                        |
+|--------------------------|-------------|-------------|------------|------------|-------------|-------|-------------|-----------------------------|
+| Linked List              | O(n)        | O(n)        | O(1)       | O(n)       | N/A         | N/A   | Linear      | [Link](src/linked_list.py)  |
+| Stack                    | O(n)        | O(n)        | O(1)       | O(1)       | N/A         | N/A   | Linear      | Todo                        |
+| Queue                    | O(n)        | O(n)        | O(1)       | O(1)       | N/A         | N/A   | Linear      | [Link](src/linked_queue.py) |
+| Unsorted Array           | O(1)        | O(n)        | O(1)\*     | O(n)       | N/A         | N/A   | Linear      | Native                      |
+| Sorted Array             | O(1)        | O(log n)    | O(n)       | O(n)       | N/A         | N/A   | Linear      | Native                      |
+| Hash Table               | N/A         | O(1)\*      | O(1)\*     | O(1)\*     | N/A         | N/A   | Hash-based  | Todo                        |
+| Binary Heap              | O(n)        | O(n)        | O(log n)   | O(log n)   | O(log n)    | N/A   | Tree        | [Link](src/binary_heap.py)  |
+| Priority Queue           | O(n)        | O(n)        | O(log n)   | O(log n)   | O(log n)    | N/A   | Tree        | [Link](src/priority_queue.py)|
+| AVL Tree (BST)           | O(log n)    | O(log n)    | O(log n)   | O(log n)   | N/A         | N/A   | Tree        | [Link](src/avl_tree.py)     |
+| Red Black Tree  (BST)    | O(log n)    | O(log n)    | O(log n)   | O(log n)   | N/A         | N/A   | Tree        | Todo                        |
+| Union Find               | N/A         | O(1)        | O(1)       | N/A        | N/A         | O(1)  | Disjoint Set| [Link](src/union_find.py)   |
 
 \* Amortized time complexity
 
