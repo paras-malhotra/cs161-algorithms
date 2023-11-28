@@ -107,6 +107,14 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 | Longest Common Subsequence | O(mn)                | O(mn)            | Dynamic Programming     | Text comparison, DNA sequencing      | [Link](src/longest_common_subsequence.py) |
 | Huffman Coding             | O(n log n)           | O(n)             | Greedy                  | Data compression, encoding schemes   | [Link](src/huffman.py)                    |
 
+## Algorithm Reductions
+
+This section highlights algorithms that can be effectively reduced to a different, well-known algorithm, showcasing the versatility and interconnectedness of algorithms.
+
+| Algorithm | Reduced To                          | Time Complexity   | Space Complexity | Application Scenario            | Link                   | Reference |
+|-----------|-------------------------------------|-------------------|------------------|---------------------------------|------------------------|-----------|
+| 2-SAT     | Strongly Connected Components (SCC) | O(n + m)          | O(n + m)         | Logical satisfiability problems | [Link](src/two_sat.py) | [Ref](https://cp-algorithms.com/graph/2SAT.html) |
+
 ## Contributing
 Contributions are welcome! Feel free to submit issues and pull requests (with unit tests if possible).
 
