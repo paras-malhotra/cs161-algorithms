@@ -104,6 +104,7 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 | Binary Search              | O(log n)             | O(1)             | Divide and Conquer      | Sorted data lookup, monotonic function inverse | [Link](src/binary_search.py)    |
 | Karatsuba Multiplication   | O(n<sup>1.585</sup>) | O(n)             | Divide and Conquer      | Large number multiplication          | [Link](src/karatsuba.py)                  |
 | Kth Order Statistics       | O(n)                 | O(1)             | Divide and Conquer      | Finding kth smallest/largest element | [Link](src/select_k.py)                   |
+| Matrix Multiplication      | O(n<sup>2.807</sup>) | O(n)             | Divide and Conquer      | Linear transformations               | [Link](src/matrix_multiplication.py)      |
 | Fibonacci Sequence         | O(n)                 | O(1)             | Dynamic Programming     | Generating Fibonacci numbers         | [Link](src/fibonacci.py)                  |
 | Unbounded Knapsack         | O(nW)                | O(W)             | Dynamic Programming     | Dynamic resource allocation          | [Link](src/knapsack.py)                   |
 | 0/1 Knapsack               | O(nW)                | O(nW)            | Dynamic Programming     | Resource allocation with constraints | [Link](src/knapsack.py)                   |
