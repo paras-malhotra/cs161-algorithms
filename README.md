@@ -86,15 +86,16 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 
 ## Other Graph Algorithms
 
-| Algorithm                 | Time Complexity | Space Complexity | Use Cases                        | Link                                 |
-|---------------------------|-----------------|------------------|----------------------------------|--------------------------------------|
-| Depth-First Search        | O(V + E)        | O(V)             | Pathfinding, tree traversals     | [Link](src/depth_first_search.py)    |
-| Connected Components      | O(V + E)        | O(V)             | Network analysis, clustering     | [Link](src/depth_first_search.py)    |
-| Topological Sort          | O(V + E)        | O(V)             | Scheduling, task ordering        | [Link](src/depth_first_search.py)    |
-| Finding Bridges           | O(V + E)        | O(V)             | Finding bridges, critical edges  | [Link](src/depth_first_search.py)    |
-| Checking Bipartite        | O(V + E)        | O(V)             | Bipartition validation           | [Link](src/breadth_first_search.py)  |
-| MST (Prim's Algorithm)    | O(V log V + E)  | O(V + E)         | Network design, clustering       | [Link](src/minimum_spanning_tree.py) |
-| MST (Kruskal's Algorithm) | O(E log E)      | O(V + E)         | Network design (sparse graphs)   | [Link](src/minimum_spanning_tree.py) |
+| Algorithm                     | Time Complexity | Space Complexity | Use Cases                           | Link                                 |
+|-------------------------------|-----------------|------------------|-------------------------------------|--------------------------------------|
+| Depth-First Search            | O(V + E)        | O(V)             | Pathfinding, tree traversals        | [Link](src/depth_first_search.py)    |
+| Connected Components          | O(V + E)        | O(V)             | Network analysis, clustering        | [Link](src/depth_first_search.py)    |
+| Strongly connected components | O(V + E)        | O(V)             | Graph condensation, cycle detection | [Link](src/strongly_connected_components.py) |
+| Topological Sort (DAG)        | O(V + E)        | O(V)             | Scheduling, task ordering           | [Link](src/depth_first_search.py)    |
+| Finding Bridges               | O(V + E)        | O(V)             | Finding bridges, critical edges     | [Link](src/depth_first_search.py)    |
+| Checking Bipartite            | O(V + E)        | O(V)             | Bipartition validation              | [Link](src/breadth_first_search.py)  |
+| MST (Prim's Algorithm)        | O(V log V + E)  | O(V + E)         | Network design, clustering          | [Link](src/minimum_spanning_tree.py) |
+| MST (Kruskal's Algorithm)     | O(E log E)      | O(V + E)         | Network design (sparse graphs)      | [Link](src/minimum_spanning_tree.py) |
 
 \* V: Number of vertices, E: Number of edges
 
