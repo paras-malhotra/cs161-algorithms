@@ -117,9 +117,11 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 
 This section highlights algorithms that can be effectively reduced to a different, well-known algorithm, showcasing the versatility and interconnectedness of algorithms.
 
-| Algorithm | Reduced To                          | Time Complexity   | Space Complexity | Application Scenario            | Link                   | Reference |
-|-----------|-------------------------------------|-------------------|------------------|---------------------------------|------------------------|-----------|
-| 2-SAT     | Strongly Connected Components (SCC) | O(n + m)          | O(n + m)         | Logical satisfiability problems | [Link](src/two_sat.py) | [Ref](https://cp-algorithms.com/graph/2SAT.html) |
+| Algorithm                  | Reduced To                          | Time Complexity | Space Complexity | Use Cases                       | Link                   | Reference |
+|----------------------------|-------------------------------------|-----------------|------------------|---------------------------------|------------------------|-----------|
+| 2-SAT                      | Strongly Connected Components (SCC) | O(n + m)        | O(n + m)         | Logical satisfiability problems | [Link](src/two_sat.py) | [Ref](https://cp-algorithms.com/graph/2SAT.html) |
+| Multi-Source Shortest Path | Single Source Shortest Path         | SSSP Algorithm  | SSSP Algorithm   | Emergency response routing      | [Link](src/multi_source_shortest_path.py) | -         |
+| Multi-Destination Shortest Path | Single Source Shortest Path    | SSSP Algorithm  | SSSP Algorithm   | Delivery routing, nearest amenities | Todo               | -         |
 
 ## Contributing
 Contributions are welcome! Feel free to submit issues and pull requests (with unit tests if possible).

@@ -32,7 +32,8 @@ def breadth_first_search(graph: Graph, start: Optional[str] = None, callback: Op
                 for neighbor, _ in graph.neighbors(current):
                     if not visited[neighbor]:
                         queue.enqueue(neighbor)
-                        parents[neighbor] = current
+                        if parents[neighbor] is None:
+                            parents[neighbor] = current
 
     if start is None:
         for vertex in graph.vertices():
