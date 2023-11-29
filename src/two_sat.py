@@ -1,5 +1,5 @@
 from graph import Graph
-from depth_first_search import get_strongly_connected_components
+from strongly_connected_components import get_strongly_connected_components
 from typing import List, Tuple, Dict
 
 def two_sat(variables: List[str], clauses: List[Tuple[str, str]]) -> bool:
