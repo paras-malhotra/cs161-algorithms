@@ -88,10 +88,11 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 
 | Algorithm                 | Time Complexity | Space Complexity | Use Cases                        | Link                                 |
 |---------------------------|-----------------|------------------|----------------------------------|--------------------------------------|
-| Topological Sort          | O(V + E)        | O(V)             | Scheduling, task ordering        | [Link](src/depth_first_search.py)    |
-| Checking Bipartite        | O(V + E)        | O(V)             | Bipartition validation           | [Link](src/breadth_first_search.py)  |
-| Connected Components      | O(V + E)        | O(V)             | Network analysis, clustering     | [Link](src/depth_first_search.py)    |
 | Depth-First Search        | O(V + E)        | O(V)             | Pathfinding, tree traversals     | [Link](src/depth_first_search.py)    |
+| Connected Components      | O(V + E)        | O(V)             | Network analysis, clustering     | [Link](src/depth_first_search.py)    |
+| Topological Sort          | O(V + E)        | O(V)             | Scheduling, task ordering        | [Link](src/depth_first_search.py)    |
+| Finding Bridges           | O(V + E)        | O(V)             | Finding bridges, critical edges  | [Link](src/depth_first_search.py)    |
+| Checking Bipartite        | O(V + E)        | O(V)             | Bipartition validation           | [Link](src/breadth_first_search.py)  |
 | MST (Prim's Algorithm)    | O(V log V + E)  | O(V + E)         | Network design, clustering       | [Link](src/minimum_spanning_tree.py) |
 | MST (Kruskal's Algorithm) | O(E log E)      | O(V + E)         | Network design (sparse graphs)   | [Link](src/minimum_spanning_tree.py) |
 

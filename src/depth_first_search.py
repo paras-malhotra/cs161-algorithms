@@ -92,6 +92,52 @@ def dfs_helper(graph: Graph, start: Optional[str] = None, callback: Optional[Cal
 
     return visited, start_times, finish_times, component_numbers if start is None else None
 
+def get_bridge_edges(graph: Graph) -> List[Tuple[str, str]]:
+    """
+    Find all bridge edges in an undirected graph using Tarjan's algorithm.
+
+    Parameters:
+        graph (Graph): The graph to search.
+
+    Returns:
+        List[Tuple[str, str]]: A list of bridge edges.
+
+    Time complexity: O(V + E)
+    """
+    if not graph.undirected:
+        raise ValueError('Graph must be undirected')
+
+    # min_start_times[vertex] is the minimum start time of all vertices reachable from vertex except through vertex's parent
+    start_times, min_start_times, visited, time = {}, {}, {vertex: False for vertex in graph.vertices()}, 0
+    bridges = []
+
+    def dfs_visit(vertex: str, parent: Optional[str]):
+        nonlocal time
+        time += 1
+        start_times[vertex] = time
+        min_start_times[vertex] = time
+        visited[vertex] = True
+
+        for neighbor, _ in graph.neighbors(vertex):
+            if neighbor == parent:
+                continue
+            if not visited[neighbor]:
+                dfs_visit(neighbor, vertex)
+                # Tree edge
+                min_start_times[vertex] = min(min_start_times[vertex], min_start_times[neighbor])
+                # If the child cannot reach any vertex with a lower start time than the current vertex, then the edge is a bridge
+                if min_start_times[neighbor] > start_times[vertex]:
+                    bridges.append((vertex, neighbor))
+            else:
+                # Back edge
+                min_start_times[vertex] = min(min_start_times[vertex], start_times[neighbor])
+
+    for vertex in graph.vertices():
+        if not visited[vertex]:
+            dfs_visit(vertex, None)
+
+    return bridges
+
 def topological_sort(graph: Graph) -> List[str]:
     """
     Topological sort of a directed acyclic graph (DAG).
