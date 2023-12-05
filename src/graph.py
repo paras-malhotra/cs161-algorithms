@@ -1,7 +1,7 @@
 from typing import Dict, List, Tuple, Optional
 
 class Graph:
-    def __init__(self, vertices: List[str], edges: List[Tuple[str, str, Optional[float]]] = None, undirected: bool = False):
+    def __init__(self, vertices: List[str], edges: List[Tuple[str, str, Optional[float]]] = None, undirected: bool = False, default_weight: float = float('inf')):
         """
         Initialize a graph with vertices and optional edges.
 
@@ -9,9 +9,11 @@ class Graph:
             vertices (List[str]): List of vertex identifiers.
             edges (List[Tuple[str, str, float]]): Optional list of edges as tuples (v1, v2, weight).
             undirected (bool): Flag to indicate if the graph is undirected. Default is False (directed graph).
+            default_weight (float): Default weight for edges not explicitly defined. Default is infinity.
         """
         self.undirected = undirected
-        self.adj_matrix: Dict[str, Dict[str, Optional[float]]] = {v: {u: float('inf') for u in vertices} for v in vertices}
+        self.default_weight = default_weight
+        self.adj_matrix: Dict[str, Dict[str, Optional[float]]] = {v: {u: default_weight for u in vertices} for v in vertices}
 
         for v in vertices:
             self.adj_matrix[v][v] = 0
@@ -19,6 +21,12 @@ class Graph:
         if edges:
             for v1, v2, *weight in edges:
                 self.add_edge(v1, v2, weight[0] if weight else None)
+
+    def clone(self) -> 'Graph':
+        """
+        Return a copy of the graph.
+        """
+        return Graph(self.vertices(), self.edges(), self.undirected)
 
     def add_vertex(self, v: str) -> None:
         """
@@ -31,10 +39,10 @@ class Graph:
             return  # Vertex already exists
 
         # Add the new vertex with infinite weights to others
-        self.adj_matrix[v] = {u: float('inf') for u in self.adj_matrix}
+        self.adj_matrix[v] = {u: self.default_weight for u in self.adj_matrix}
         for u in self.adj_matrix:
-            self.adj_matrix[u][v] = float('inf')
-            self.adj_matrix[v][u] = float('inf')
+            self.adj_matrix[u][v] = self.default_weight
+            self.adj_matrix[v][u] = self.default_weight
         self.adj_matrix[v][v] = 0
 
     def remove_vertex(self, v: str) -> None:
@@ -70,9 +78,9 @@ class Graph:
             v1 (str): The source vertex.
             v2 (str): The destination vertex.
         """
-        self.adj_matrix[v1][v2] = float('inf')
+        self.adj_matrix[v1][v2] = self.default_weight
         if self.undirected:
-            self.adj_matrix[v2][v1] = float('inf')
+            self.adj_matrix[v2][v1] = self.default_weight
 
     def get_reversed(self) -> 'Graph':
         """
@@ -115,7 +123,7 @@ class Graph:
         Returns:
             List[Tuple[str, float]]: A list of tuples, each containing a neighbor vertex and the weight of the edge.
         """
-        return [(v, weight) for v, weight in self.adj_matrix[vertex].items() if weight != float('inf') and v != vertex]
+        return [(v, weight) for v, weight in self.adj_matrix[vertex].items() if weight != self.default_weight and v != vertex]
 
     def vertices(self) -> List[str]:
         """
@@ -147,7 +155,7 @@ class Graph:
             str: A string representing the edges in the graph.
         """
         # Check if the graph is unweighted
-        is_unweighted = all(weight in (1, float('inf')) for row in self.adj_matrix.values() for weight in row.values())
+        is_unweighted = all(weight in (1, self.default_weight) for row in self.adj_matrix.values() for weight in row.values())
 
         edge_list = []
 

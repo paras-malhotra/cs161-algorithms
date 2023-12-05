@@ -99,6 +99,16 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 
 \* V: Number of vertices, E: Number of edges
 
+## Network Flow Algorithms
+
+| Algorithm          | Time Complexity            | Space Complexity | Objective      | Weighted | Directed | Use Case                                                     | Link |
+|--------------------|----------------------------|------------------|----------------|----------|----------|--------------------------------------------------------------|------|
+| Edmonds-Karp       | O(VE<sup>2</sup>)          | O(V + E)         | Max Flow       | ✅      | ✅       | Network routing, Bipartite matching, Traffic congestion      | [Link](src/network_flow.py) |
+| Karger's Algorithm | O(V<sup>2</sup>) per run   | O(V + E)         | Global Min Cut | ❌/✅*  | ❌       | Image segmentation, Clustering, Network reliability          | Todo |
+
+V: Number of vertices, E: Number of edges
+\* Karger's algorithm can be modified to work for weighted graphs (e.g. by contracting edges based on probabilities proportional to edge weight).
+
 ## Other Algorithms
 
 | Algorithm                  | Time Complexity      | Space Complexity | Strategy                | Use Cases                            | Link                                      |
