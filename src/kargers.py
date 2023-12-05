@@ -12,7 +12,7 @@ def kargers_min_cut_iteration_unweighted(graph: Graph) -> int:
         graph (Graph): The graph.
 
     Returns:
-        int: The minimum cut of the graph.
+        int: The estimated minimum cut of the graph after one iteration. This is not guaranteed to be the actual minimum cut.
 
     Time complexity: O(E * α(V)), where α(V) is the inverse Ackermann function, effectively constant.
     Space complexity: O(V) where V is the number of vertices.
@@ -57,7 +57,7 @@ def kargers_min_cut_unweighted(graph: Graph, num_iterations: Optional[int] = Non
         num_iterations (int): The number of iterations to perform. Defaults to n^2 * log(n), where n is the number of vertices in the graph.
 
     Returns:
-        int: The minimum cut of the graph.
+        int: The minimum cut of the graph. This is not guaranteed to be the actual minimum cut but the probability of failure is very low if the number of iterations is high enough.
 
     Time complexity: O(num_iterations * E * α(V)), where α(V) is the inverse Ackermann function, effectively constant.
     Space complexity: O(V) where V is the number of vertices.
