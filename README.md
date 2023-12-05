@@ -101,12 +101,13 @@ Note: Even though all algorithms can be modified to become stable, it may affect
 
 ## Network Flow Algorithms
 
-| Algorithm          | Time Complexity            | Space Complexity | Objective      | Weighted | Directed | Use Case                                                     | Link |
-|--------------------|----------------------------|------------------|----------------|----------|----------|--------------------------------------------------------------|------|
-| Edmonds-Karp       | O(VE<sup>2</sup>)          | O(V + E)         | Max Flow       | ✅      | ✅       | Network routing, Bipartite matching, Traffic congestion      | [Link](src/network_flow.py) |
-| Karger's Algorithm | O(V<sup>2</sup>) per run   | O(V + E)         | Global Min Cut | ❌/✅*  | ❌       | Image segmentation, Clustering, Network reliability          | Todo |
+| Algorithm          | Time Complexity        | Space Complexity | Objective             | Weighted | Directed | Use Case                                                     | Link |
+|--------------------|------------------------|------------------|-----------------------|----------|----------|--------------------------------------------------------------|------|
+| Edmonds-Karp       | O(VE<sup>2</sup>)      | O(V + E)         | Max Flow, Min s-t cut | ✅      | ✅       | Network routing, Bipartite matching, Traffic congestion      | [Link](src/network_flow.py) |
+| Karger's Algorithm | O(num_iter * E * α(V)) | O(V)             | Global Min Cut        | ❌/✅*  | ❌       | Image segmentation, Clustering, Network reliability          | [Link](src/kargers.py) |
 
-V: Number of vertices, E: Number of edges
+V: Number of vertices, E: Number of edges, α(V): Inverse Ackermann function, num_iters is typically set to V<sup>2</sup>log(V) for higher accuracy
+
 \* Karger's algorithm can be modified to work for weighted graphs (e.g. by contracting edges based on probabilities proportional to edge weight).
 
 ## Other Algorithms
